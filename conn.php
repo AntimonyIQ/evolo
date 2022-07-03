@@ -15,4 +15,15 @@ if (mysqli_connect_errno()) {
    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
+class mysqli { }
+
+function mysqli_connect(
+   ?string $hostname = null,
+   ?string $username = null,
+   ?string $password = null,
+   ?string $database = null,
+   ?int $port = null,
+   ?string $socket = null
+): mysqli|false { }
+
 ?>
