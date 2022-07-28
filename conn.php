@@ -3,9 +3,9 @@
 session_start();
 // Change this to your connection info.
 $DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
+$DATABASE_USER = 'id19232319_dataseed';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'user';
+$DATABASE_NAME = 'id19232319_user';
 
 
 // Try and connect using the info above.
@@ -14,16 +14,5 @@ if (mysqli_connect_errno()) {
    // If there is an error with the connection, stop the script and display the error.
    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
-
-class mysqli { }
-
-function mysqli_connect(
-   ?string $hostname = null,
-   ?string $username = null,
-   ?string $password = null,
-   ?string $database = null,
-   ?int $port = null,
-   ?string $socket = null
-): mysqli|false { }
 
 ?>

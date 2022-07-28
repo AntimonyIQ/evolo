@@ -22,10 +22,10 @@
         
         <!-- Styles -->
         <link href="../../css2.css?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@600&display=swap" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome-all.min.css" rel="stylesheet">
-        <link href="css/swiper.css" rel="stylesheet">
-        <link href="css/styles.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome-all.min.css" rel="stylesheet">
+        <link href="../css/swiper.css" rel="stylesheet">
+        <link href="../css/styles.css" rel="stylesheet">
         
         <!-- Favicon  -->
         <link rel="icon" href="images/favicon.png">
@@ -112,28 +112,52 @@
             <div class="container">
                 <div class="row">
                     <!-- Registration Form -->
-                    <form>
+                    <form action="index.php" method="post" enctype="multipart/form-data">
+                        <?php
+                            include "../conn.php";
+                            if (isset($_POST['submit'])) {
+                                echo 'Helooooooooooooooooitialized' . '<br />';
+
+                                $username = $_POST['username'];
+                                $password = $_POST['password'];
+                                $email = $_POST['email'];
+                                $wallet = $_POST['wallet'];
+
+                                if (!isset($username, $password, $wallet, $email)){
+                                    # code...
+                                    echo 'Please enter a username and password' . '<br />';
+                                }
+                                if (empty($username) || empty($password) || empty($wallet) || empty($email)){
+                                    echo 'Please enter all form fields' . '<br />';
+                                }
+                                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                    # code...
+                                    echo 'Please enter a valid email address' . '<br />';
+                                }
+                            }
+
+                        ?>
                         <div class="mb-4 form-floating">
-                            <input type="text" class="form-control" id="floatingInput1" placeholder="Name">
+                            <input type="text" class="form-control" id="floatingInput1" placeholder="Username" name="username">
                             <label for="floatingInput1">Name</label>
                         </div>
                         <div class="mb-4 form-floating">
-                            <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com">
+                            <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com" name="email">
                             <label for="floatingInput2">Email</label>
                         </div>
                         <div class="mb-4 form-floating">
-                            <input type="password" class="form-control" id="floatingInput3" placeholder="Password">
+                            <input type="password" class="form-control" id="floatingInput3" placeholder="Password" name="password">
                             <label for="floatingInput3">Password</label>
                         </div>
                         <div class="mb-4 form-floating">
-                            <input type="text" class="form-control" id="floatingInput4" placeholder="Bitcoin Address">
+                            <input type="text" class="form-control" id="floatingInput4" placeholder="Bitcoin Address" name="wallet">
                             <label for="floatingInput4">Bitcoin Address</label>
                         </div>
                         <div class="mb-4 form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me
                         </div>
-                        <button type="submit" class="form-control-submit-button">Register</button>
+                        <button name="submit" type="submit" class="form-control-submit-button">Register</button>
                     </form>
                     <!-- end of registrations form -->
                 </div> <!-- end of row -->
