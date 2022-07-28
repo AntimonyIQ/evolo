@@ -115,7 +115,12 @@
                     <form action="index.php" method="post" enctype="multipart/form-data">
                         <?php
                             include "../conn.php";
+
                             if (isset($_POST['submit'])) {
+                                $t_ref = 0;
+                                $balance = 0;
+                                $ref_id = '';
+                                $withdrawal = 0;
                                 echo 'Helooooooooooooooooitialized' . '<br />';
 
                                 $username = $_POST['username'];
@@ -134,6 +139,7 @@
                                     # code...
                                     echo 'Please enter a valid email address' . '<br />';
                                 }
+                                
                             }
 
                         ?>
