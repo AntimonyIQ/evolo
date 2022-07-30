@@ -3,9 +3,9 @@
 session_start();
 // Change this to your connection info.
 $DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'id19232319_dataseed';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'id19232319_user';
+$DATABASE_USER = 'trusjnyx_trusjnyx';
+$DATABASE_PASS = 'K{2d4#+cfJ@X';
+$DATABASE_NAME = 'trusjnyx_user';
 
 
 // Try and connect using the info above.
