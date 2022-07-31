@@ -18,7 +18,7 @@
         <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
 
         <!-- Webpage Title -->
-        <title>Terms & Conditions</title>
+        <title>EblockTrader | Signup</title>
         
         <!-- Styles -->
         <link href="../../css2.css?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
             <div class="container">
 
                 <!-- Image Logo -->
-                <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a> 
+                <a class="navbar-brand logo-image" href="../"><img src="../images/logo.png" alt="alternative"></a> 
 
                 <!-- Text Logo - Use this if you don't have a graphic logo -->
                 <!-- <a class="navbar-brand logo-text" href="index.html">Evolo</a> -->
@@ -61,17 +61,15 @@
                             <a class="nav-link" href="index.html#pricing">Pricing</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Drop</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Form</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                                <li><a class="dropdown-item" href="article.html">Article Details</a></li>
+                                <li><a class="dropdown-item" href="../signup/">Sign Up</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li><a class="dropdown-item" href="terms.html">Terms Conditions</a></li>
-                                <li><div class="dropdown-divider"></div></li>
-                                <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                                <li><a class="dropdown-item" href="../login/">Log In</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html#contact">Contact</a>
+                            <a class="nav-link" href="mailto:support@eblocktrader.com">Contact</a>
                         </li>
                     </ul>
                     <span class="nav-item social-icons">
@@ -114,15 +112,15 @@
                     <!-- Registration Form -->
                     <form action="index.php" method="post" enctype="multipart/form-data">
                         <?php
-                            include "../conn.php";
-
                             if (isset($_POST['submit'])) {
+                                include "../conn.php";
+                                include "../variables.php";
+
                                 $t_ref = 0;
                                 $balance = 0;
-                                $ref_id = '';
+                                $ref_id = $uniqid;
                                 $withdrawal = 0;
-                                echo 'Helooooooooooooooooitialized' . '<br />';
-
+                                // echo 'Helooooooooooooooooitialized' . '<br />';
                                 $username = $_POST['username'];
                                 $password = $_POST['password'];
                                 $email = $_POST['email'];
@@ -130,14 +128,37 @@
 
                                 if (!isset($username, $password, $wallet, $email)){
                                     # code...
-                                    echo 'Please enter a username and password' . '<br />';
+                                    echo('<span style="color:red;">Please correctly fill out the form. </span>' . '<br />');
                                 }
                                 if (empty($username) || empty($password) || empty($wallet) || empty($email)){
-                                    echo 'Please enter all form fields' . '<br />';
+                                    echo('<span style="color:red;">Form validation failed, Fields cannot be empty. </span>' . '<br />');
                                 }
                                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                                     # code...
-                                    echo 'Please enter a valid email address' . '<br />';
+                                    echo('<span style="color:red;">Please enter a valid email address. </span>' . '<br />');
+                                }
+                                if (strlen($password) < 8) {
+                                    echo('<span style="color:red;">Password must be atleast 8 characters long. </span>' . '<br />');
+                                }
+                                if ($stmt = $con->prepare($select)) {
+                                    # code...
+                                    $stmt->bind_param('s', $email);
+    	                            $stmt->execute();
+    	                            $stmt->store_result();
+
+                                    if ($stmt = $con->prepare($insert)) {
+                                        # code...
+                                        $stmt->bind_param('ssssssss', $username, $email, $password, $wallet, $balance, $ref_id, $t_ref, $withdrawal);
+                                        $stmt->execute();
+                                        echo '<div class="alert alert-success alert-dismissible"> <strong> Signup Successfully</strong> </div>';
+                                        echo('Please Login');
+                                    } else {
+                                    
+                                        echo '<span class="alert alert-danger alert-dismissible"> <strong> Form Submition Failed! Try again </strong> </span> <br />';
+                                    }
+                                } else {
+                                    
+                                    echo '<span class="alert alert-danger alert-dismissible"> <strong> Signup Failed</strong> </span><br />';
                                 }
                                 
                             }
@@ -179,14 +200,14 @@
                     <div class="col-lg-12">
                         <div class="footer-col first">
                             <h6>About Website</h6>
-                            <p class="p-small">Aliquam ultrices turpis a auctor commodo. Etiam consectetur tincidunt elit ac euismod. Duis et finibus felis, non porttitor rapena live dolor</p>
+                            <p class="p-small">eblocktrader is an advanced investment platform. It was established July 2010. We are strictly into trading, mining with lots of investment and assets in paid adverts, HYIPs, ICOs, Forex also buying signals from big exchanges</p>
                         </div> <!-- end of footer-col -->
                         <div class="footer-col second">
                             <h6>Links</h6>
                             <ul class="list-unstyled li-space-lg p-small">
-                                <li>Important: <a href="terms.html">Terms & Conditions</a>, <a href="privacy.html">Privacy Policy</a></li>
-                                <li>Useful: <a href="#">Colorpicker</a>, <a href="#">Icon Library</a>, <a href="#">Illustrations</a></li>
-                                <li>Menu: <a href="index.html">Home</a>, <a href="#services">Services</a>, <a href="details.html">Details</a>, <a href="#contact">Contact</a></li>
+                                <li><a href="../signup/">Sign up</a></li>
+                                <li><a href="../login/">Log in</a></li>
+                                <li><a href="mailto:support@eblocktrader.com">Support</a></li>
                             </ul>
                         </div> <!-- end of footer-col -->
                         <div class="footer-col third">
@@ -214,7 +235,7 @@
                                     <i class="fab fa-instagram fa-stack-1x"></i>
                                 </a>
                             </span>
-                            <p class="p-small">Quam posuerei pellent esque vam <a href="mailto:contact@site.com"><strong>contact@site.com</strong></a></p>
+                            <p class="p-small">Follow us on social media <a href="mailto:support@eblocktrader.com"><strong>support@eblocktrader.com</strong></a></p>
                         </div> <!-- end of footer-col -->
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
@@ -228,7 +249,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p class="p-small">Copyright © <a href="#your-link">Your name</a></p>
+                        <p class="p-small">Copyright © <a href="../">eBlocktrader 2022</a></p>
                     </div> <!-- end of col -->
                 </div> <!-- enf of row -->
             </div> <!-- end of container -->
