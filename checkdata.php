@@ -1,5 +1,7 @@
 <?php
-include 'conn.php';
+// include 'conn.php';
+session_start();
+
 if(!isset($_SESSION['loggedin'])) {
     header('Location: index.html');
     exit;

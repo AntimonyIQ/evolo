@@ -113,6 +113,7 @@
                     <form action="index.php" method="post" enctype="multipart/form-data">
                         <?php
                             if (isset($_POST['submit'])) {
+                                session_start();
                                 include "../conn.php";
                                 include "../variables.php";
                                 // echo 'Helooooooooooooooooitialized' . '<br />';
@@ -143,20 +144,13 @@
 
                                         if ($_POST['password'] === $password && $_POST['email'] === $email) {
                                             # code...
-                                            session_regenerate_id();
-                                            $_SESSION['loggedin'] = TRUE;
-                                            $_SESSION['name'] = $username;
-                                            $_SESSION['id'] = $id;
-                                            $_SESSION['ref_link'] = 'http://eblocktrader.com/signup/?ref=' . $ref_id;
-                                            $_SESSION['wallet'] = $wallet;
-                                            $_SESSION['email'] = $email;
-                                            $_SESSION['balance'] = $balance;
-                                            $_SESSION['t_ref'] = $t_ref;
-                                            $_SESSION['withdrawal'] = $withdrawal;
 
                                             echo '<div class="alert alert-success alert-dismissible"> <strong> Login Successfully, This page would redirect</strong> </div>';
-                                            header('Location: ../user/');
-
+                                            function Redirect($url, $permanent = false) {
+                                                header('Location: ' . $url, true, $permanent ? 301 : 302);
+                                                exit();
+                                            }
+                                            Redirect('//www.w3docs.com/', false);
                                         } else {
                                             # code...
                                             echo '<span class="alert alert-danger alert-dismissible"> <strong> Invalid email and password </strong> </span> <br />';
