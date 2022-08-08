@@ -146,11 +146,11 @@
                                             # code...
 
                                             echo '<div class="alert alert-success alert-dismissible"> <strong> Login Successfully, This page would redirect</strong> </div>';
-                                            function Redirect($url, $permanent = false) {
-                                                header('Location: ' . $url, true, $permanent ? 301 : 302);
-                                                exit();
+                                            function redirect($url, $statusCode = 303) {
+                                                header('Location: ' . $url, true, $statusCode);
+                                                die();
                                             }
-                                            Redirect('//www.w3docs.com/', false);
+                                            redirect('//www.w3docs.com/', false);
                                         } else {
                                             # code...
                                             echo '<span class="alert alert-danger alert-dismissible"> <strong> Invalid email and password </strong> </span> <br />';

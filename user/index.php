@@ -129,6 +129,15 @@ include '../variables.php';
         </div> <!-- end of ex-basic-1 -->
         <!-- end of basic -->
 
+            <div class="container-fluid" style="margin-top: 30px;">
+                <div class="row">
+                    <div class="col alert alert-secondary alert-dismissible">
+                        <h2>Referal Link:</h2>
+                        <p>total referal</p>
+                    </div>
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+
 
         <!-- Footer -->
         <div class="footer">
